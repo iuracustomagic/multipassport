@@ -13,27 +13,29 @@ export default function MapScreen () {
     }
 
     useEffect(() => {
-        console.log(convertLongitude(52.54))
-        console.log(convertLatitude(103.89))
+
         axiosClient.get('/user')
             .then(({data}) => {
                 setUser(data)
                 const convertedLong = convertLongitude(data.longitude)
                 const convertedLat = convertLatitude(data.latitude)
-                // const convertedLong = convertLongitude(37.6)
-                // const convertedLat = convertLatitude(55.7)
+                // const convertedLat = convertLatitude(-25)
+                // const convertedLong = convertLongitude(133)
+                setLatitude(`${convertedLat-10}%`)
                 setLongitude(`${convertedLong}%`)
-                setLatitude(`${convertedLat}%`)
+
 
                 console.log(data)
             })
     }, [])
     return (
+        <div className='map-container'>
         <div className='map-screen'>
 
-            <span className="mgo-widget-call_pulse" style={{bottom:latitude,left:longitude}}></span>
+            <span className="mgo-widget-call_pulse m-0" style={{bottom:latitude,left:longitude}}></span>
 
 
+        </div>
         </div>
     )
 }

@@ -145,14 +145,16 @@ table > tbody > tr > td {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #1e211e;
+    background-image: url("./assets/bg.png");
 }
 
 .login-signup-form .form {
     width: 360px;
     position: relative;
     z-index: 1;
-    background: #FFFFFF;
-    max-width: 360px;
+    background: #2d2525;
+    max-width: 460px;
     padding: 34px;
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1);
 }
@@ -173,6 +175,10 @@ table > tbody > tr > td {
 .login-signup-form .form .message a {
     color: #5b08a7;
     text-decoration: none;
+}
+.modal-title {
+    color:white;
+    text-align: center;
 }
 
 /* Login/Signup form */
@@ -338,20 +344,60 @@ video{
     color: #cbc7c7 !important;
 
 }
+
+.map-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    background-color: #05123d;
+}
 .map-screen {
     position: relative;
-    width: 100vw;
-    max-width: 1860px;
-    height: 100vh;
+    width: 520px;
+
+    height: 302px;
     background-color: #0d251e;
     background-image: url("./assets/map.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    overflow: auto;
+    overflow-x: auto;
+
 
 }
-
+@media screen and (min-width:750px){
+    .map-screen {
+        width: 750px;
+        height: 435px;
+    }
+}
+@media screen and (min-width:900px){
+    .map-screen {
+        width: 900px;
+        height: 523px;
+    }
+}
+@media screen and (min-width:1200px){
+    .map-screen {
+        width: 1200px;
+        height: 697px;
+    }
+}
+@media screen and (min-width:1300px){
+    .map-screen {
+        width: 1300px;
+        height: 754px;
+    }
+}
+@media screen and (min-width:1860px){
+    .map-screen {
+        width: 1860px;
+        height: 1080px;
+    }
+}
 /*Pulse circle*/
 
 .mgo-widget-call_pulse {
@@ -360,8 +406,8 @@ video{
     background-color: #e0634f;
     border-radius: 100%;
     position: absolute;
-    left: 20%;
-    top: 20%;
+    /*left: 20%;*/
+    /*top: 20%;*/
     margin: auto 0;
     opacity: .75;
     -webkit-animation: shake 2s infinite ease-in-out;
