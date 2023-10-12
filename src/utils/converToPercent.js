@@ -6,6 +6,6 @@ export const convertLongitude = (value) =>{
 
 export const convertLatitude = (value) =>{
     if(value<0){
-        return Math.abs((value*50)/90)
+        return Math.abs((value*50)/90)+20
     } else return (value*50)/90 +50
 }

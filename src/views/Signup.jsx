@@ -58,7 +58,10 @@ export default function Signup() {
 
     const onSubmit = ev => {
         ev.preventDefault()
-
+        if(userReg.password.length === 0 ||userReg.email.length === 0){
+            setErrors('Email and password is required')
+            return
+        }
         axiosClient.post('/signup', userReg)
             .then(({data}) => {
                 setUser(data.user)
@@ -67,28 +70,29 @@ export default function Signup() {
             .catch(err => {
                 const response = err.response;
                 if (response && response.status === 422) {
-                    setErrors(response.data.errors)
+                    setErrors('Email must be unique')
                 }
             })
     }
 
     return (
         <div className="login-signup-form animated fadeInDown">
-            <div className="form">
+            <div className="signup_form_container">
                 <h5 className="modal-title mb-3" id="exampleModalLabel">Enter your details to receive a multi-passport </h5>
                     {errors &&
-                    <div className="alert">
-                        {Object.keys(errors).map(key => (
-                            <p key={key}>{errors[key][0]}</p>
-                        ))}
+                    <div className="alert text-danger">
+                        <p>{errors}</p>
+                        {/*{Object.keys(errors).map(key => (*/}
+                        {/*    <p key={key}>{errors[key][0]}</p>*/}
+                        {/*))}*/}
                     </div>
                     }
-                <form onSubmit={onSubmit}>
+                <form onSubmit={onSubmit} className='signup_form'>
                     <div className="input-group mb-3">
-                        <input className='form-control bg-dark text-light' value={userReg.name} onChange={ev => setUserReg({...userReg, name: ev.target.value})} placeholder="Name"/>
+                        <input className='form-control text-dark' value={userReg.name} onChange={ev => setUserReg({...userReg, name: ev.target.value})} placeholder="Name"/>
                     </div>
                     <div className="input-group mb-3">
-                        <select name="country" className="form-select bg-dark text-light" onChange={handleCountrySelect} aria-label="Default select example">
+                        <select name="country" className="form-select text-dark" onChange={handleCountrySelect} aria-label="Default select example">
                             <option value="0">Country</option>
                             {countries && countries.map(country => (
                                 <option key={country.id}  value={country.id}>{country.name}</option>
@@ -96,7 +100,7 @@ export default function Signup() {
                         </select>
                     </div>
                     <div className="input-group mb-3">
-                        <select name="country" className="form-select bg-dark text-light" onChange={handleCitySelect} aria-label="Default select example">
+                        <select name="country" className="form-select text-dark" onChange={handleCitySelect} aria-label="Default select example">
                             <option value="0">Town</option>
                             {cities && cities.map(city => (
                                 <option key={city.id} value={city.id}>{city.name}</option>
@@ -104,23 +108,24 @@ export default function Signup() {
                         </select>
                     </div>
                     <div className="input-group mb-3">
-                        <input className='form-control bg-dark text-light'  type="password" onChange={ev => setUserReg({...userReg, password: ev.target.value})} placeholder="Password"/>
+                        <input className='form-control text-dark' type='email' value={userReg.email} onChange={ev => setUserReg({...userReg, email: ev.target.value})} placeholder="Email"/>
                     </div>
                     <div className="input-group mb-3">
-                        <input className='form-control bg-dark text-light' type="password" onChange={ev => setUserReg({...userReg, password_confirmation: ev.target.value})} placeholder="Password Confirmation"/>
+                        <input className='form-control text-dark'  type="password" onChange={ev => setUserReg({...userReg, password: ev.target.value})} placeholder="Password"/>
                     </div>
                     <div className="input-group mb-3">
-                        <input className='form-control bg-dark text-light' type='email' value={userReg.email} onChange={ev => setUserReg({...userReg, email: ev.target.value})} placeholder="Email"/>
+                        <input className='form-control text-dark' type="password" onChange={ev => setUserReg({...userReg, password_confirmation: ev.target.value})} placeholder="Password Confirmation"/>
                     </div>
-                    <div className='d-flex justify-content-around align-items-center'>
-
-                        <button type="submit" className="btn btn-primary px-4" data-bs-dismiss="modal">Signup</button>
-                        <div className='d-flex align-items-center'>
-                            <span className='text-light' >Already registered?</span>
-                            <Link className="btn btn-primary ms-2" to='/login'>Sign In</Link>
-                        </div>
-
+                    <button type="submit" className="btn bg-light btn-outline-dark px-4 mb-3" data-bs-dismiss="modal">Signup</button>
+                    <div className='d-flex align-items-center justify-content-end'>
+                        <span className='text-light' >Already registered?</span>
+                        <Link className="btn bg-light btn-outline-dark ms-2" to='/login'>Sign In</Link>
                     </div>
+                    {/*<div className='d-flex justify-content-around align-items-center'>*/}
+
+                    {/*    */}
+
+                    {/*</div>*/}
                 </form>
 
 

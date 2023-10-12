@@ -35,7 +35,10 @@ input {
 input:focus {
     border-color: #5b08a7;
 }
+ul li {
 
+    list-style: none;
+}
 .btn,
 .btn-add,
 .btn-edit,
@@ -121,10 +124,10 @@ table > tbody > tr > td {
 
 .alert {
     padding: 1rem;
-    background-color: #ff4040;
-    color: white;
+    /*background-color: #ff4040;*/
+    color: #f62d2d;
     border-radius: 0.5rem;
-    margin-bottom: 1rem;
+    /*margin-bottom: 0.2rem;*/
 }
 
 .notification {
@@ -145,20 +148,34 @@ table > tbody > tr > td {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #1e211e;
-    background-image: url("./assets/bg.png");
+    background-color: #000;
+    /*background-image: url("./assets/bg.png");*/
 }
 
-.login-signup-form .form {
-    width: 360px;
+.signup_form_container {
+    width: 500px;
     position: relative;
-    z-index: 1;
-    background: #2d2525;
-    max-width: 460px;
-    padding: 34px;
-    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1);
-}
 
+    padding: 34px;
+
+}
+.signup_form {
+    max-width: 340px;
+    margin: 0 auto;
+}
+.login_form_container {
+    position: relative;
+    padding: 34px;
+}
+.login_form_container::after {
+    content: '';
+    position: absolute;
+    top:0;
+    right: 50%;
+    width: 2px;
+    height: 100%;
+    background-color: white;
+}
 .login-signup-form .title {
     font-size: 20px;
     margin-bottom: 1rem;
@@ -180,6 +197,10 @@ table > tbody > tr > td {
     color:white;
     text-align: center;
 }
+.login-signup-form .btn:hover {
+    color: #083178;
+}
+
 
 /* Login/Signup form */
 
@@ -257,7 +278,7 @@ table > tbody > tr > td {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #111;
+    background: #000;
     /*z-index: 2;*/
     transition: .5s;
 }
@@ -313,8 +334,8 @@ video{
     padding-top: 10%;
     padding-left: 150px;
     /*align-items: center;*/
-    background-color: #2e382e;
-    background-image: url("./assets/bg.png");
+    background-color: #000;
+    /*background-image: url("./assets/bg.png");*/
     color: whitesmoke;
     z-index: 10;
 }
@@ -354,12 +375,16 @@ video{
     height: 100vh;
     background-color: #05123d;
 }
+.exit_icon {
+    position: absolute;
+    top: 100px;
+    right: 50px;
+}
 .map-screen {
     position: relative;
     width: 520px;
-
     height: 302px;
-    background-color: #0d251e;
+    background-color: #000;
     background-image: url("./assets/map.png");
     background-position: center;
     background-repeat: no-repeat;
@@ -367,6 +392,33 @@ video{
     overflow-x: auto;
 
 
+}
+.info_box_image {
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    width: 300px;
+    height: 145px;
+    background-image: url("./assets/left-box-removebg.png");
+}
+
+.info_box_text {
+    position: absolute;
+    left: 10px;
+    top: 20px;
+    font-size: 15px;
+}
+.sputnik_icon {
+    position: absolute;
+    bottom: 30%;
+    left: 4%;
+    width: 25px;
+}
+.map_icon {
+    position: absolute;
+    bottom: 30%;
+    left: 7%;
+    width: 25px;
 }
 @media screen and (min-width:750px){
     .map-screen {
@@ -391,11 +443,56 @@ video{
         width: 1300px;
         height: 754px;
     }
+    .info_box_image {
+        left: 5px;
+        bottom: 30px;
+        width: 375px;
+        height: 182px;
+    }
+    .info_box_text {
+        left: 20px;
+        top: 40px;
+        font-size: 18px;
+    }
+    .sputnik_icon {
+
+        width: 35px;
+    }
+    .map_icon {
+
+        width: 42px;
+    }
 }
 @media screen and (min-width:1860px){
     .map-screen {
         width: 1860px;
         height: 1080px;
+    }
+    .info_box_image {
+        left: 8px;
+        bottom: 60px;
+        width: 535px;
+        height: 260px;
+    }
+    .info_box_text {
+        left: 30px;
+        top: 50px;
+        font-size: 20px;
+    }
+    .info_box_image li {
+        margin-bottom: 10px;
+    }
+    .sputnik_icon {
+
+        bottom: 30%;
+        left: 4%;
+        width: 45px;
+    }
+    .map_icon {
+
+        bottom: 30%;
+        left: 7%;
+        width: 52px;
     }
 }
 /*Pulse circle*/
@@ -498,4 +595,22 @@ video{
         transform: scale(1);
         opacity: 0;
     }
+}
+
+
+.info_box_user {
+    padding-top:30px;
+    padding-left: 30px;
+}
+.info_box_user li {
+    margin-bottom: 10px;
+}
+
+.exit_link {
+    position: absolute;
+    left:5px;
+    top: 5px;
+    font-size: 24px;
+    color: transparent;
+    text-decoration: none;
 }

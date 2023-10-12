@@ -1,13 +1,19 @@
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import axiosClient from "../axios-client.js";
 import {createRef} from "react";
 import {useStateContext} from "../context/ContextProvider.jsx";
 import { useState } from "react";
 
 export default function Login() {
-    const emailRef = createRef()
-    const passwordRef = createRef()
-    const { setUser, setToken } = useStateContext()
+
+    const { setUser, setToken, token } = useStateContext()
+
+
+
+    if (token) {
+        return <Navigate to="/map" />;
+    }
+
     const [message, setMessage] = useState(null)
     const [userLog, setUserLog] = useState({
         email: '',
@@ -16,8 +22,14 @@ export default function Login() {
 
     const onSubmit = ev => {
         ev.preventDefault()
-
-
+        if(userLog.email.length === 0){
+            setMessage('Enter email')
+            return
+        }
+        if(userLog.password.length === 0){
+            setMessage('Enter password')
+            return
+        }
         axiosClient.post('/login', userLog)
             .then(({data}) => {
                 setUser(data.user)
@@ -26,35 +38,44 @@ export default function Login() {
             .catch((err) => {
                 const response = err.response;
                 if (response && response.status === 422) {
-                    setMessage(response.data.message)
+                    setMessage('Invalid email or password')
                 }
             })
     }
 
     return (
         <div className="login-signup-form animated fadeInDown">
-            <div className="form">
-                <h5 className="modal-title mb-3" id="exampleModalLabel">Enter your details to login </h5>
-                    {message &&
-                    <div className="alert text-light">
-                        <p>{message}</p>
-                    </div>
-                    }
-                <form onSubmit={onSubmit}>
+            <div className="login_form_container">
 
-                    <div className="input-group mb-3">
-                        <input className='form-control bg-dark text-light' type='email' value={userLog.email} onChange={ev => setUserLog({...userLog, email: ev.target.value})} placeholder="Email"/>
-                    </div>
-                    <div className="input-group mb-3">
-                        <input className='form-control bg-dark text-light'  type="password" onChange={ev => setUserLog({...userLog, password: ev.target.value})} placeholder="Password"/>
+                <form onSubmit={onSubmit} className='login_form'>
+
+                    <div className="row">
+                        <div className="col-sm-6">
+                            <Link className="btn bg-light btn-outline-dark" to='/signup'>Login as observer</Link>
+                        </div>
+                        <div className="col-sm-6 d-flex flex-column align-items-end">
+                            {message &&
+                            <div className="alert text-danger">
+                                <p>{message}</p>
+                            </div>
+                            }
+                            <div className="input-group mb-3">
+                                <input className='form-control text-dark' type='email' value={userLog.email} onChange={ev => setUserLog({...userLog, email: ev.target.value})} placeholder="Email"/>
+                            </div>
+                            <div className="input-group mb-3">
+                                <input className='form-control text-dark'  type="password" onChange={ev => setUserLog({...userLog, password: ev.target.value})} placeholder="Password"/>
+                            </div>
+
+
+                            <div className='d-flex justify-content-around align-items-center'>
+
+                                <button type="submit" className="btn bg-light btn-outline-dark px-4" data-bs-dismiss="modal">Start</button>
+
+                            </div>
+                        </div>
                     </div>
 
 
-                    <div className='d-flex justify-content-around align-items-center'>
-
-                        <button type="submit" className="btn btn-primary px-4" data-bs-dismiss="modal">Sign In</button>
-                        <Link className="btn btn-primary" to='/signup'>Back to Signup</Link>
-                    </div>
                 </form>
                 {/*<form onSubmit={onSubmit}>*/}
                 {/*    <h1 className="title">Login into your account</h1>*/}

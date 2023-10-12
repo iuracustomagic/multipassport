@@ -19,7 +19,7 @@ return (
         <div className='text-light'>
             <h1 className='text-uppercase mb-3 title'>I didn't say it was possible; I said it already happened</h1>
             <div className='d-flex justify-content-end'>
-                <Link to='/enter' className='btn btn-light fst-italic toggle fs-3' type='button'>Earth 2.0</Link>
+                <Link to='/enter' className='btn btn-light fst-italic toggle fs-2 p-0' type='button'>Earth 2.0</Link>
             </div>
 
         </div>
